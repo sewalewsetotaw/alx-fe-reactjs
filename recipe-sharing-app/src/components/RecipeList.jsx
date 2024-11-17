@@ -26,6 +26,10 @@ import useRecipeStore from "../components/recipeStore";
 import { useNavigate, Link } from "react-router-dom";
 const RecipeList = () => {
   const filteredRecipes = useRecipeStore((state) => state.filteredRecipes); // Get filtered recipes
+  const recipes = useRecipeStore((state) => state.recipes);
+  const favorites = useRecipeStore((state) => state.favorites);
+  const addFavorite = useRecipeStore((state) => state.addFavorite);
+  const removeFavorite = useRecipeStore((state) => state.removeFavorite);
   const navigate = useNavigate();
   function viewDetails(id) {
     navigate(`/recipes/${id}`);
@@ -41,6 +45,17 @@ const RecipeList = () => {
             </h3>
             <p>{recipe.description}</p>
             {/* <button onClick={() => viewDetails(recipe.id)}>view details</button> */}
+            <button
+              onClick={() =>
+                favorites.includes(recipe.id)
+                  ? removeFavorite(recipe.id)
+                  : addFavorite(recipe.id)
+              }
+            >
+              {favorites.includes(recipe.id)
+                ? "Remove from Favorites"
+                : "Add to Favorites"}
+            </button>
           </div>
         ))
       ) : (
