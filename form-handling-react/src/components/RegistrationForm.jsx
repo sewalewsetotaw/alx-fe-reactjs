@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 function RegistrationForm() {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const { username, email, password } = form;// Destructure state for individual usage
   const [error, setError] = useState({});
   const validateForm = () => {
     const error = {};
@@ -40,7 +41,7 @@ function RegistrationForm() {
           type="text"
           name="username"
           id=""
-          value={form.username}
+          value={username}
           onChange={handleChange}
         />
         {error.username}
@@ -50,7 +51,7 @@ function RegistrationForm() {
           type="email"
           name="email"
           id=""
-          value={form.email}
+          value={email}
           onChange={handleChange}
         />
         {error.email}
@@ -60,7 +61,7 @@ function RegistrationForm() {
           type="password"
           name="password"
           id=""
-          value={form.password}
+          value={password}
           onChange={handleChange}
         />
         {error.password}
