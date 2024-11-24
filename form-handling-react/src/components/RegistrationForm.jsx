@@ -2,15 +2,15 @@ import React, { useState } from "react";
 
 function RegistrationForm() {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
-  const { username, email, password } = form;// Destructure state for individual usage
-  const [error, setError] = useState({});
+  const { username, email, password } = form; // Destructure state for individual usage
+  const [error, setErrors] = useState({});
   const validateForm = () => {
     const error = {};
-    if (!form.username.trim()) {
+    if (!username) {
       error.username = "User name is required";
-    } else if (!form.email.trim()) {
+    } else if (!email) {
       error.email = "Email is required";
-    } else if (!form.password.trim()) {
+    } else if (!password) {
       error.password = "Password is required";
     }
     return error;
@@ -22,7 +22,7 @@ function RegistrationForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = validateForm(form);
-    setError(newErrors);
+    setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
       console.log("Form submitted successfully:", form);
