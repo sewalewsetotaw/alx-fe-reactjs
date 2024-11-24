@@ -1,26 +1,26 @@
+// src/App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Profile from "./components/Profile";
-import ProfileDetails from "./components/ProfileDetails";
-import ProfileSettings from "./components/ProfileSettings";
-import Post from "./components/Post";
-import ProtectedRoute from "./components/ProtectedRoute";
+import BlogPost from "./components/BlogPost";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        
-        <Route path="/profile" element={<ProtectedRoute />}>
-          <Route index element={<Profile />} />
-          <Route path="details" element={<ProfileDetails />} />
-          <Route path="settings" element={<ProfileSettings />} />
-        </Route>
+      <div>
+        <nav>
+          <Link to="/">Home</Link> | <Link to="/profile">Profile</Link> |{" "}
+          <Link to="/blog/1">Blog Post 1</Link> |{" "}
+          <Link to="/blog/2">Blog Post 2</Link>
+        </nav>
 
-        <Route path="/post/:postId" element={<Post />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<div>Home Page</div>} />
+          <Route path="/profile/*" element={<Profile />} />
+          {/* Dynamic route for blog posts */}
+          <Route path="/blog/:id" element={<BlogPost />} />
+        </Routes>
+      </div>
     </Router>
   );
 }
