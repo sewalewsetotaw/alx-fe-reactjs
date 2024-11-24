@@ -7,22 +7,25 @@ const fetchData = async () => {
 
 const PostsComponent = () => {
   // Use the useQuery hook to handle data fetching and caching
-  const { data, error, isLoading, isFetching, refetch } = useQuery(
+  const { data, error, isLoading, isError, refetch } = useQuery(
     "fetchData",
     fetchData
   );
-
+  // Create a custom function to trigger refetch
+  const fetchPosts = () => {
+    refetch(); // Manually trigger the refetch
+  };
   // Handle loading state
   if (isLoading) return <div>Loading...</div>;
 
   // Handle error state
   if (error) return <div>Error loading data</div>;
   // Display loading state while refetching
-  if (isFetching) return <div>Refetching...</div>;
+  if (isError) return <div>Refetching...</div>;
   // Render the fetched data with refetch button
   return (
     <div>
-      <button onClick={() => refetch()}>Refetch Data</button>
+      <button onClick={() => fetchPosts()}>Refetch Data</button>
       {data.map((item) => (
         <div key={item.id}>
           <h3>{item.title}</h3>
