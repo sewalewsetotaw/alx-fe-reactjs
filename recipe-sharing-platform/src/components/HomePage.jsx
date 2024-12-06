@@ -9,11 +9,11 @@ function HomePage() {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Recipes</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {recipes.map((recipe) => (
-          <div
+          <article
             key={recipe.id}
-            className="border rounded-lg shadow-lg p-4 flex flex-col items-center"
+            className="border rounded-lg shadow-lg p-4 flex flex-col items-center hover:shadow-xl hover:scale-105 transition-transform duration-300"
           >
             <img
               src={recipe.image}
@@ -22,7 +22,7 @@ function HomePage() {
             />
             <h2 className="text-xl font-semibold mt-4">{recipe.title}</h2>
             <p className="text-gray-600 text-sm mt-2">{recipe.summary}</p>
-          </div>
+          </article>
         ))}
       </div>
     </div>
