@@ -1,18 +1,15 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
 import HomePage from "./components/HomePage";
-function App() {
-  const [count, setCount] = useState(0);
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import RecipeDetail from "./components/RecipeDetail";
 
+function App() {
   return (
-    <>
-      <HomePage />
-      <p className="text-blue-500">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
+      </Routes>
+    </Router>
   );
 }
 
