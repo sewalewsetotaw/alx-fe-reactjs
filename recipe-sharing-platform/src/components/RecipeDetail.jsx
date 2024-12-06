@@ -29,9 +29,9 @@ function RecipeDetail() {
       <img
         src={recipe.image}
         alt={recipe.title}
-        className="w-full h-64 object-cover rounded-lg mb-6"
+        className="w-full h-64 object-cover rounded-lg shadow-md mb-6"
       />
-      <div className="mb-6">
+      <div className="mb-6 p-4 shadow-lg rounded-lg bg-white">
         <h2 className="text-2xl font-semibold mb-2">Ingredients</h2>
         <ul className="list-disc list-inside">
           {recipe.ingredients.map((ingredient, index) => (
@@ -42,7 +42,7 @@ function RecipeDetail() {
         </ul>
       </div>
       <div>
-        <h2 className="text-2xl font-semibold mb-2">Instructions</h2>
+        <h2 className="p-4 shadow-lg rounded-lg bg-white">Instructions</h2>
         <p className="text-gray-700">{recipe.instructions}</p>
       </div>
     </div>
