@@ -2,25 +2,25 @@ import React, { useState } from "react";
 import { fetchUserData } from "../services/githubService"; // Import the API service
 
 function Search() {
-  const [user, setUser] = useState(""); // For input field
-  const [userData, setUserData] = useState(null); // To store user data
+  const [username, setUsername] = useState(""); // Input field value
+  const [userData, setUserData] = useState(null); // Fetched user data
   const [loading, setLoading] = useState(false); // Loading state
   const [error, setError] = useState(""); // Error state
 
   const handleChange = (e) => {
-    setUser(e.target.value); // Update input field value
+    setUsername(e.target.value); // Update input value
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Show loading message
     setError(""); // Reset error message
-    setUserData(null); // Reset previous data
+    setUserData(null); // Reset previous user data
     try {
-      const data = await fetchUserData(user); // Fetch user data
-      setUserData(data); // Update state with fetched data
+      const data = await fetchUserData(username); // Call GitHub API
+      setUserData(data); // Store fetched user data
     } catch (err) {
-      setError(err.message); // Update error state
+      setError("Looks like we can't find the user."); // Set error message
     } finally {
       setLoading(false); // Hide loading message
     }
@@ -32,23 +32,20 @@ function Search() {
         <label htmlFor="username">GitHub Username:</label>
         <input
           type="text"
-          name="username"
-          value={user}
+          id="username"
+          value={username}
           onChange={handleChange}
         />
-        <br />
         <button type="submit">Search</button>
       </form>
-
-      {loading && <p>Loading...</p>} {/* Display loading state */}
-      {error && <p>{error}</p>} {/* Display error message */}
-
-      {/* Display user details if data is available */}
-      {userData && (
+      {/* Conditional rendering for different states */}
+      {loading && <p>Loading...</p>} {/* Loading state */}
+      {error && <p>{error}</p>} {/* Error message */}
+      {userData /* Success state: Display user data */ && (
         <div>
           <img
             src={userData.avatar_url}
-            alt={userData.login}
+            alt={`${userData.login}'s avatar`}
             width="100"
             style={{ borderRadius: "50%" }}
           />
