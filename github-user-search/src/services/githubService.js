@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 const BASE_URL = "https://api.github.com/search/users";
@@ -11,12 +10,15 @@ const BASE_URL = "https://api.github.com/search/users";
 export const fetchUserData = async ({ username, location, minRepos }) => {
   try {
     // Construct query parameters
-    let query = username ? `${username} in:login` : "";
-    if (location) query += ` location:${location}`;
-    if (minRepos) query += ` repos:>=${minRepos}`;
+    let query = [];
+    if (username) query.push(`${username} in:login`);
+    if (location) query.push(`location:${location}`);
+    if (minRepos) query.push(`repos:>=${minRepos}`);
+    const queryString = query.join("+");
 
     // Make the API call with the constructed query
-    const response = await axios.get(`${BASE_URL}?q=${query}`);
+    const url = `${BASE_URL}?q=${queryString}`;
+    const response = await axios.get(url);
     return response.data.items; // Return the list of matched users
   } catch (error) {
     // Handle API errors
