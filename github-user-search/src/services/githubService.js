@@ -10,11 +10,11 @@ const BASE_URL = "https://api.github.com/search/users";
 export const fetchUserData = async ({ username, location, minRepos }) => {
   try {
     // Construct query parameters
-    let query = [];
-    if (username) query.push(`${username} in:login`);
-    if (location) query.push(`location:${location}`);
-    if (minRepos) query.push(`repos:>=${minRepos}`);
-    const queryString = query.join("+");
+    let q = [];
+    if (username) q.push(`${username} in:login`);
+    if (location) q.push(`location:${location}`);
+    if (minRepos) q.push(`repos:>=${minRepos}`);
+    const queryString = q.join("+");
 
     // Make the API call with the constructed query
     const url = `${BASE_URL}?q=${queryString}`;
